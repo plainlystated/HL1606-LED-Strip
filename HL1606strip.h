@@ -56,6 +56,7 @@ enum {
 #define BLUE 0b001
 #define VIOLET 0b101
 
+
 class HL1606strip
 {
   private:
@@ -69,9 +70,9 @@ class HL1606strip
     unsigned long _faderPulseNextEdge;
 
     // we will control up to 255 LEDs!
-    uint8_t *_leds;
     uint8_t _numLEDs;
   public:
+    uint8_t *leds;
 
     HL1606strip(int, int, int, int, uint8_t);
     HL1606strip(int, int, int, uint8_t);

@@ -45,7 +45,7 @@ HL1606strip::HL1606strip(int dPin, int latchPin, int clkPin, uint8_t numLEDs)
 
   // how many in the string
   _numLEDs = numLEDs;
-  _leds = (uint8_t *)malloc(numLEDs);
+  leds = (uint8_t *)malloc(numLEDs);
 
   for (uint8_t i=0; i<numLEDs; i++) {
     setLEDcolor(i, BLACK);
@@ -72,7 +72,7 @@ HL1606strip::HL1606strip(int dPin, int sPin, int latchPin, int clkPin, uint8_t n
 
   // how many in the string
   _numLEDs = numLEDs;
-  _leds = (uint8_t *)malloc(numLEDs);
+  leds = (uint8_t *)malloc(numLEDs);
 
   for (uint8_t i=0; i<numLEDs; i++) {
     setLEDcolor(i, BLACK);
@@ -283,7 +283,7 @@ void HL1606strip::latch()
 // this takes about 20ms for a 160 LED strip
 void HL1606strip::writeStrip(void) {
   for (uint8_t i=0; i<_numLEDs; i++) {
-    pushCmd(_leds[_numLEDs-1-i]);
+    pushCmd(leds[_numLEDs-1-i]);
   }
   latch();
 }
@@ -293,7 +293,7 @@ uint8_t HL1606strip::getLEDcolor(uint8_t n) {
 
   if (n > _numLEDs) return 0;
   
-  x = _leds[n];
+  x = leds[n];
   
   x &= 0x7F; // get rid of latch
   
@@ -322,9 +322,8 @@ void HL1606strip::setLEDcolor(uint8_t n, uint8_t color) {
   if (color & GREEN) 
     x |= 0x10;
   
-  _leds[n] = x;
+  leds[n] = x;
 }
-
 
 uint8_t HL1606strip::numLEDs(void) {
   return _numLEDs;
